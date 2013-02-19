@@ -306,31 +306,31 @@ test('low watermark push', function(t) {
 
   assert.equal(called, 0);
   assert.equal(r.push(0), true);
-  assert.equal(called, 1);
+  assert.equal(called, 0);
   assert.equal(r.push(1), true);
-  assert.equal(called, 2);
+  assert.equal(called, 0);
   assert.equal(r.push(2), true);
-  assert.equal(called, 2);
+  assert.equal(called, 0);
   assert.equal(r.push(3), false);
-  assert.equal(called, 2);
+  assert.equal(called, 0);
   assert.equal(r.push(4), false);
-  assert.equal(called, 2);
+  assert.equal(called, 0);
   assert.equal(r.push(5), false);
-  assert.equal(called, 2);
+  assert.equal(called, 0);
   assert.deepEqual(r._readableState.buffer, [0, 1, 2, 3, 4, 5]);
 
   reading = true;
 
   assert.equal(r.read(), 0);
-  assert.equal(called, 2);
+  assert.equal(called, 0);
   assert.equal(r.read(), 1);
-  assert.equal(called, 3);
+  assert.equal(called, 1);
   assert.equal(r.read(), 2);
-  assert.equal(called, 4);
+  assert.equal(called, 2);
   assert.equal(r.read(), 3);
-  assert.equal(called, 5);
+  assert.equal(called, 3);
   assert.equal(r.read(), 4);
-  assert.equal(called, 6);
+  assert.equal(called, 4);
   r.push(null);
 
   r.pipe(toArray(function(array) {
