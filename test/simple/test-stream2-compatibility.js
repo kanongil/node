@@ -47,4 +47,8 @@ TestReader.prototype._read = function(n) {
 };
 
 var reader = new TestReader();
-assert.equal(ondataCalled, 1);
+assert.equal(ondataCalled, 0);
+
+process.on('exit', function() {
+  assert.equal(ondataCalled, 1);
+});

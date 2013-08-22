@@ -461,11 +461,11 @@ test('adding readable triggers data flow', function(t) {
       r.push(new Buffer('asdf'));
   };
 
-  var called = false;
   r.on('readable', function() {
     onReadable = true;
     r.read();
   });
+  t.ok(!onReadable);
 
   r.on('end', function() {
     t.equal(readCalled, 3);
